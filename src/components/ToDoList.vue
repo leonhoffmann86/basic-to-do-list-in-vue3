@@ -5,19 +5,34 @@
       <label for="newTodo">New To Do</label>
       <input v-model="newToDo" type="text" name="newTodo" />
       <button>Add</button>
-      <section id="todos">
-        <ul>
-          <li
-            :class="{ done: toDo.done }"
-            @click="toggleDone(toDo)"
-            v-for="toDo in toDos"
-            :key="toDo.id"
-          >
-            {{ toDo.todo }}
-          </li>
-        </ul>
-      </section>
     </form>
+    <section id="todos">
+      <ul>
+        <li
+          :class="{ done: toDo.done }"
+          @click="toggleDone(toDo)"
+          v-for="toDo in toDos"
+          :key="toDo.id"
+        >
+          {{ toDo.todo }}
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section id="done-todos">
+      <ul>
+        <li
+          :class="{ done: toDo.done }"
+          @click="toggleDone(toDo)"
+          v-for="toDo in doneToDos"
+          :key="toDo.id"
+        >
+          {{ toDo.todo }}
+        </li>
+      </ul>
+    </section>
   </main>
 </template>
 
@@ -30,6 +45,7 @@ export default {
   setup() {
     const newToDo = ref("");
     const toDos = ref([]);
+    const doneToDos = ref([]);
 
     function addNewToDo() {
       toDos.value.push({ id: Date.now, done: false, todo: newToDo.value });
@@ -38,11 +54,24 @@ export default {
 
     function toggleDone(toDo) {
       toDo.done = !toDo.done;
+
+      if (toDo.done === true) {
+        toDos.value.forEach(function (toDo, id) {
+          toDos.value.splice(id, 1);
+          doneToDos.value.push(toDo);
+        });
+      } else {
+        doneToDos.value.forEach(function (toDo, id) {
+          doneToDos.value.splice(id, 1);
+          toDos.value.push(toDo);
+        });
+      }
     }
 
     return {
       newToDo,
       toDos,
+      doneToDos,
       addNewToDo,
       toggleDone,
     };
@@ -62,9 +91,18 @@ main {
   }
 }
 
-input {
-  min-width: 160px;
-  max-width: 80%;
+form,
+hr {
+  max-width: 100%;
+}
+
+@media (min-width: 600px) {
+  main {
+    max-width: 800px;
+  }
+  input {
+    width: 60%;
+  }
 }
 
 label {
