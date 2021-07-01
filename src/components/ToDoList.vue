@@ -25,7 +25,7 @@
       <ul>
         <li
           :class="{ done: toDo.done }"
-          @click="toggleDone(toDo)"
+          @click="toggleUndone(toDo)"
           v-for="toDo in doneToDos"
           :key="toDo.id"
         >
@@ -53,19 +53,19 @@ export default {
     }
 
     function toggleDone(toDo) {
-      toDo.done = !toDo.done;
+      toDo.done = true;
 
-      if (toDo.done === true) {
-        toDos.value.forEach(function (toDo, id) {
-          toDos.value.splice(id, 1);
-          doneToDos.value.push(toDo);
-        });
-      } else {
-        doneToDos.value.forEach(function (toDo, id) {
-          doneToDos.value.splice(id, 1);
-          toDos.value.push(toDo);
-        });
-      }
+      var index = toDos.value.indexOf(toDo);
+      toDos.value.splice(index, 1);
+      doneToDos.value.push(toDo);
+    }
+
+    function toggleUndone(toDo) {
+      toDo.done = false;
+
+      var index = doneToDos.value.indexOf(toDo);
+      doneToDos.value.splice(index, 1);
+      toDos.value.push(toDo);
     }
 
     return {
@@ -74,6 +74,7 @@ export default {
       doneToDos,
       addNewToDo,
       toggleDone,
+      toggleUndone,
     };
   },
 };
@@ -81,14 +82,8 @@ export default {
 
 <style scoped>
 main {
-  width: 600px;
+  width: 100%;
   margin: 0 auto;
-}
-
-@media (max-width: 600px) {
-  main {
-    width: 100%;
-  }
 }
 
 form,
@@ -96,13 +91,12 @@ hr {
   max-width: 100%;
 }
 
-@media (min-width: 600px) {
-  main {
-    max-width: 800px;
-  }
-  input {
-    width: 60%;
-  }
+input {
+  height: 40px;
+}
+
+button {
+  height: 46px;
 }
 
 label {
@@ -112,10 +106,27 @@ label {
 li {
   text-align: left;
   cursor: pointer;
+  padding: 10px;
+}
+
+li:hover,
+li:active {
+  border: 1px solid lightgray;
+  border-radius: 2px;
 }
 
 .done {
   text-decoration: line-through;
   color: lightgray;
+}
+
+@media (min-width: 600px) {
+  main {
+    max-width: 800px;
+    width: 600px;
+  }
+  input {
+    width: 60%;
+  }
 }
 </style>
