@@ -55,7 +55,7 @@ export default {
     function toggleDone(toDo) {
       toDo.done = true;
 
-      var index = toDos.value.indexOf(toDo);
+      const index = toDos.value.indexOf(toDo);
       toDos.value.splice(index, 1);
       doneToDos.value.push(toDo);
     }
@@ -63,7 +63,7 @@ export default {
     function toggleUndone(toDo) {
       toDo.done = false;
 
-      var index = doneToDos.value.indexOf(toDo);
+      const index = doneToDos.value.indexOf(toDo);
       doneToDos.value.splice(index, 1);
       toDos.value.push(toDo);
     }
