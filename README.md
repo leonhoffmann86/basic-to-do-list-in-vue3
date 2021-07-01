@@ -2,7 +2,11 @@
 
 [] optimize form with form library  
 [] split components (input, list)  
-[] use real id instead of date
+[] use real id instead of date  
+[] Push done to dos to the done to array  
+[] Make to do order be changeable via drag and drop  
+[] Drag and drop can also change to "done" status  
+[] Make to dos to be fully deletable
 
 ## Project setup
 

@@ -51,6 +51,17 @@ export default {
 </script>
 
 <style scoped>
+main {
+  width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  main {
+    width: 100%;
+  }
+}
+
 input {
   min-width: 160px;
   max-width: 80%;
@@ -62,6 +73,7 @@ label {
 
 li {
   text-align: left;
+  cursor: pointer;
 }
 
 .done {
