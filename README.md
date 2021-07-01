@@ -1,8 +1,8 @@
 # to-do-pwa
 
-[] optimize form with form library\s\s
-[] split components (input, list)\s\s
-[] use real id instead of date\s\s
+[] optimize form with form library  
+[] split components (input, list)  
+[] use real id instead of date
 
 ## Project setup
 
